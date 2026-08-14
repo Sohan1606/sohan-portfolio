@@ -1,0 +1,219 @@
+﻿// Navigation.tsx — SOHAN // SYSTEM 2.0
+// A quiet instrument. Control panel, not decorative header.
+import React, { useState, useEffect, useRef } from "react";
+import { useActiveSection } from "../hooks/useActiveSection";
+import { useScrollLock } from "../hooks/useScrollLock";
+import { useSystemState } from "../hooks/useSystemState";
+
+const SECTION_IDS = [
+  "hero","identity","stack","work","lab","journey","now","contact",
+];
+
+const NAV_ITEMS = [
+  { id: "identity", label: "Identity", short: "01" },
+  { id: "stack",    label: "Stack",    short: "02" },
+  { id: "work",     label: "Work",     short: "03" },
+  { id: "lab",      label: "Lab",      short: "04" },
+  { id: "journey",  label: "Journey",  short: "05" },
+  { id: "now",      label: "Now",      short: "06" },
+  { id: "contact",  label: "Connect",  short: "07" },
+];
+
+function scrollTo(id: string) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+const Navigation: React.FC = () => {
+  const active      = useActiveSection(SECTION_IDS);
+  const systemState = useSystemState(active);
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [logoNote, setLogoNote] = useState(false);
+
+  useScrollLock(menuOpen);
+
+  const clickCount = useRef(0);
+  const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const logoTimer  = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleLogoClick = () => {
+    scrollTo("hero");
+    clickCount.current += 1;
+    if (clickTimer.current) clearTimeout(clickTimer.current);
+    clickTimer.current = setTimeout(() => { clickCount.current = 0; }, 500);
+    if (clickCount.current >= 3) {
+      clickCount.current = 0;
+      if (logoTimer.current) clearTimeout(logoTimer.current);
+      setLogoNote(true);
+      logoTimer.current = setTimeout(() => setLogoNote(false), 2000);
+    }
+  };
+
+  useEffect(() => () => {
+    if (clickTimer.current) clearTimeout(clickTimer.current);
+    if (logoTimer.current)  clearTimeout(logoTimer.current);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth >= 768) setMenuOpen(false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMenuOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  return (
+    <>
+      <header role="banner"
+        className={[
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          scrolled ? "bg-base/92 backdrop-blur-sm border-b border-border/40" : "bg-transparent",
+        ].join(" ")}
+      >
+        <div className="editorial h-14 flex items-center justify-between gap-4">
+
+          {/* LOGOTYPE */}
+          <div className="relative shrink-0">
+            <button onClick={handleLogoClick} aria-label="Go to top"
+              className="group flex items-center gap-2 focus-visible:outline-signal">
+              <span className="font-sans font-black text-sm tracking-[-0.04em] text-fog
+                               group-hover:text-signal transition-colors duration-200">
+                SK
+              </span>
+              <span className="font-mono text-[0.5rem] text-dim/60 tracking-widest
+                               group-hover:text-signal transition-colors duration-200 hidden sm:block">
+                // SYSTEM
+              </span>
+            </button>
+
+            {logoNote && (
+              <div className="absolute top-full left-0 mt-2 whitespace-nowrap
+                             bg-base border border-border/40 px-3 py-2
+                             pointer-events-none select-none z-10"
+                aria-live="polite" role="status">
+                <span className="font-mono text-[0.5rem] text-signal tracking-widest uppercase block">
+                  System
+                </span>
+                <span className="font-mono text-[0.45rem] text-dim/50 tracking-widest block">
+                  identity confirmed.
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* SYSTEM STATE — desktop only, subtle */}
+          <div className="hidden lg:flex items-center gap-2 shrink-0" aria-hidden="true">
+            <span className="w-1 h-1 rounded-full bg-signal" />
+            <span className="font-mono text-[0.45rem] text-dim/40 tracking-widest uppercase">
+              {systemState}
+            </span>
+          </div>
+
+          {/* DESKTOP NAV */}
+          <nav aria-label="Primary navigation" className="hidden md:flex items-center gap-6 lg:gap-8">
+            {NAV_ITEMS.map(({ id, label, short }) => {
+              const isActive = active === id;
+              return (
+                <button key={id} onClick={() => scrollTo(id)}
+                  aria-current={isActive ? ("page" as const) : undefined}
+                  className={[
+                    "group flex items-center gap-1.5 font-mono text-[0.55rem] tracking-widest uppercase",
+                    "transition-colors duration-200 focus-visible:outline-signal",
+                    isActive ? "text-signal" : "text-dim hover:text-fog",
+                  ].join(" ")}
+                >
+                  <span className={isActive ? "text-signal" : "text-border/60 group-hover:text-dim"}>
+                    {short}
+                  </span>
+                  <span>{label}</span>
+                  {isActive && <span className="w-1 h-1 rounded-full bg-signal" aria-hidden="true" />}
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* CTA */}
+          <a href="#contact" onClick={e => { e.preventDefault(); scrollTo("contact"); }}
+            className="hidden md:inline-flex items-center gap-2 font-mono text-[0.55rem]
+                       tracking-widest uppercase text-dim border border-border/50 px-3 py-1.5
+                       hover:border-signal hover:text-signal transition-all duration-200
+                       focus-visible:outline-signal shrink-0">
+            Connect
+          </a>
+
+          {/* HAMBURGER */}
+          <button onClick={() => setMenuOpen(v => !v)}
+            aria-expanded={menuOpen} aria-controls="mobile-menu"
+            aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+            className="md:hidden flex flex-col gap-1.5 p-2 focus-visible:outline-signal shrink-0">
+            <span className={["block w-5 h-px bg-fog transition-all duration-200 origin-center",
+              menuOpen ? "rotate-45 translate-y-[7px]" : ""].join(" ")} />
+            <span className={["block w-5 h-px bg-fog transition-all duration-200",
+              menuOpen ? "opacity-0" : ""].join(" ")} />
+            <span className={["block w-5 h-px bg-fog transition-all duration-200 origin-center",
+              menuOpen ? "-rotate-45 -translate-y-[7px]" : ""].join(" ")} />
+          </button>
+        </div>
+      </header>
+
+      {/* MOBILE MENU */}
+      <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu"
+        className={[
+          "fixed inset-0 z-40 bg-base flex flex-col justify-center transition-all duration-300",
+          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
+        ].join(" ")}>
+        <nav className="editorial flex flex-col gap-5">
+          <div className="flex items-center gap-2 mb-6">
+            <span className="w-1 h-1 rounded-full bg-signal" aria-hidden="true" />
+            <span className="font-mono text-[0.45rem] text-dim/50 tracking-widest uppercase">
+              Navigation
+            </span>
+          </div>
+          {NAV_ITEMS.map(({ id, label, short }, i) => {
+            const isActive = active === id;
+            return (
+              <button key={id} onClick={() => { scrollTo(id); setMenuOpen(false); }}
+                className={[
+                  "text-left flex items-baseline gap-4 transition-colors duration-200",
+                  "focus-visible:outline-signal",
+                  isActive ? "text-fog" : "text-dim hover:text-fog",
+                ].join(" ")}
+                style={{ animationDelay: `${i * 40}ms` }}>
+                <span className="font-mono text-[0.5rem] text-signal tracking-widest w-6">{short}</span>
+                <span className="font-sans font-black text-display-lg tracking-tighter leading-none">
+                  {label}
+                </span>
+                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-signal mb-1" aria-hidden="true" />}
+              </button>
+            );
+          })}
+          <div className="mt-8 pt-6 border-t border-border/30 flex items-center gap-6">
+            <a href="https://github.com/Sohan1606" target="_blank" rel="noopener noreferrer"
+              className="font-mono text-[0.55rem] text-dim hover:text-fog tracking-widest uppercase
+                         transition-colors focus-visible:outline-signal">GitHub</a>
+            <a href="https://www.linkedin.com/in/sohan-khachane-4a214b275"
+              target="_blank" rel="noopener noreferrer"
+              className="font-mono text-[0.55rem] text-dim hover:text-fog tracking-widest uppercase
+                         transition-colors focus-visible:outline-signal">LinkedIn</a>
+          </div>
+        </nav>
+      </div>
+    </>
+  );
+};
+
+export default Navigation;
+
+

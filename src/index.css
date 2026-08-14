@@ -1,0 +1,158 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   SOHAN // SYSTEM 2.1 — GLOBAL STYLES
+   ============================================================ */
+
+@layer base {
+  :root {
+    --color-void:    #050505;
+    --color-base:    #0A0A0A;
+    --color-surface: #0E0E0E;
+    --color-raised:  #141414;
+    --color-border:  #1E1E1E;
+    --color-fog:     #F0F0F0;
+    --color-ghost:   #F8F8F8;
+    --color-muted:   #888888;
+    --color-dim:     #444444;
+    --color-signal:  #DC2626;
+    --color-deep:    #B91C1C;
+    --color-ember:   #7F1D1D;
+
+    scroll-behavior: smooth;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+
+  html {
+    background-color: var(--color-base);
+    color: var(--color-fog);
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--color-base);
+    overflow-x: hidden;
+  }
+
+  /* Selection */
+  ::selection {
+    background: var(--color-signal);
+    color: var(--color-ghost);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 2px; }
+  ::-webkit-scrollbar-track { background: var(--color-base); }
+  ::-webkit-scrollbar-thumb { background: var(--color-border); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-signal); }
+
+  /* Focus */
+  :focus-visible {
+    outline: 1px solid var(--color-signal);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+
+  /* ── SYSTEM LABEL ── */
+  .system-label {
+    @apply font-mono text-label-sm text-muted tracking-widest uppercase;
+  }
+
+  /* ── SECTION HEADING ── */
+  .section-heading {
+    @apply font-sans font-black text-display-xl text-fog leading-none tracking-tighter;
+  }
+
+  /* ── ACCENT LINE — thin red rule ── */
+  .accent-line {
+    @apply block w-8 h-px bg-signal;
+  }
+
+  /* ── DIM ACCENT LINE ── */
+  .dim-line {
+    @apply block w-8 h-px bg-dim/30;
+  }
+
+  /* ── STRUCTURAL BORDER ── */
+  .border-system {
+    @apply border border-border;
+  }
+
+  /* ── LINK ── */
+  .link-system {
+    @apply text-muted hover:text-signal transition-colors duration-200
+           font-mono text-label-md tracking-widest uppercase;
+  }
+
+  /* ── BUTTONS ── */
+  .btn-ghost {
+    @apply border border-fog/30 text-fog/80 font-sans font-medium text-sm tracking-wider
+           px-6 py-3 hover:border-signal hover:text-signal transition-all duration-200
+           focus-visible:outline-signal;
+  }
+
+  .btn-signal {
+    @apply bg-signal text-ghost font-sans font-semibold text-sm tracking-wider
+           px-6 py-3 hover:bg-deep transition-all duration-200
+           focus-visible:outline-signal focus-visible:outline-offset-2;
+  }
+
+  /* ── STATUS DOT ── */
+  .status-dot {
+    @apply w-1.5 h-1.5 rounded-full bg-signal animate-blink;
+  }
+
+  /* ── MONO METADATA ── */
+  .mono-meta {
+    @apply font-mono text-label-sm text-dim tracking-widest;
+  }
+
+  /* ── EDITORIAL CONTAINER ── */
+  .editorial {
+    @apply max-w-editorial mx-auto px-6 md:px-12 lg:px-16 xl:px-20;
+  }
+
+  /* ── SECTION VERTICAL RULE ── */
+  .section-rule {
+    @apply absolute top-0 bottom-0 left-6 md:left-12 lg:left-16 xl:left-20 w-px bg-border/20;
+  }
+
+  /* ── COMMAND LABEL — system annotation ── */
+  .cmd-label {
+    @apply font-mono text-[0.45rem] tracking-widest uppercase text-dim/40;
+  }
+
+  /* ── TECHNICAL ANNOTATION ── */
+  .tech-annotation {
+    @apply font-mono text-[0.4rem] tracking-widest text-dim/25 uppercase;
+  }
+
+  /* ── PROJECT ROW — shared base ── */
+  .project-row {
+    @apply border-b border-border/20 last:border-b-0 transition-all duration-200;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .will-transform { will-change: transform; backface-visibility: hidden; }
+
+  /* Borders with opacity shorthand */
+  .border-dim { border-color: rgb(68 68 68 / 0.3); }
+}
