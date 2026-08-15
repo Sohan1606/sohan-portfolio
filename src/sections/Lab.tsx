@@ -113,7 +113,7 @@ const Lab: React.FC = () => {
       <div className="editorial py-section">
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}>
-          <SystemLabel number="05" label="Build Lab" />
+          <SystemLabel number="04" label="Engineering Archive" />
         </motion.div>
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}

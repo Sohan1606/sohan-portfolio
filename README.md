@@ -1,10 +1,8 @@
-# SOHAN // SYSTEM 5.0
+# SOHAN // REDLINE SYSTEM
 
-Personal developer operating system — portfolio for **Sohan Khachane**,
-a 4th-year Computer Engineering student focused on **Cloud Engineering,
-DevOps, DevSecOps and Software Engineering**.
+Cinematic developer portfolio for **Sohan Khachane** — a 4th-year Computer Engineering student focused on **Cloud Engineering, DevOps, DevSecOps and Software Engineering**.
 
-> SOHAN // SYSTEM 5.0 — a personal developer operating system.
+> SOHAN // REDLINE SYSTEM — late-night coder terminal energy.
 > Black screen. White type. Red signals. Real projects. Real systems.
 
 ## Stack
