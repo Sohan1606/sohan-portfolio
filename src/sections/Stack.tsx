@@ -53,7 +53,7 @@ const Stack: React.FC = () => {
 
       <div className="editorial py-section relative">
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}>
-          <SystemLabel number="05" label="Stack" />
+          <SystemLabel number="06" label="Stack" />
         </motion.div>
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP} className="mt-10 md:mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-end">

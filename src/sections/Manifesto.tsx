@@ -93,7 +93,7 @@ const Manifesto: React.FC = () => {
       <div className="editorial py-section">
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}>
-          <SystemLabel number="02" label="Manifesto" />
+          <SystemLabel number="03" label="Manifesto" />
         </motion.div>
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}

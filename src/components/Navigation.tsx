@@ -6,18 +6,19 @@ import { useScrollLock } from "../hooks/useScrollLock";
 import { useSystemState } from "../hooks/useSystemState";
 
 const SECTION_IDS = [
-  "hero","identity","manifesto","work","lab","stack","journey","now","contact",
+  "hero","identity","openrepo","manifesto","work","lab","stack","journey","now","contact",
 ];
 
 const NAV_ITEMS = [
   { id: "identity",  label: "Origin",     short: "01" },
-  { id: "manifesto", label: "Rules",      short: "02" },
-  { id: "work",      label: "Best Work",  short: "03" },
-  { id: "lab",       label: "Archive",    short: "04" },
-  { id: "stack",     label: "Stack",      short: "05" },
-  { id: "journey",   label: "Path",       short: "06" },
-  { id: "now",       label: "Now",        short: "07" },
-  { id: "contact",   label: "Connect",    short: "08" },
+  { id: "openrepo",  label: "Git Log",    short: "02" },
+  { id: "manifesto", label: "Rules",      short: "03" },
+  { id: "work",      label: "Best Work",  short: "04" },
+  { id: "lab",       label: "Archive",    short: "05" },
+  { id: "stack",     label: "Stack",      short: "06" },
+  { id: "journey",   label: "Path",       short: "07" },
+  { id: "now",       label: "Now",        short: "08" },
+  { id: "contact",   label: "Connect",    short: "09" },
 ];
 
 function scrollTo(id: string) {
@@ -64,7 +65,7 @@ const Navigation: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const fn = () => { if (window.innerWidth >= 768) setMenuOpen(false); };
+    const fn = () => { if (window.innerWidth >= 1024) setMenuOpen(false); };
     window.addEventListener("resize", fn);
     return () => window.removeEventListener("resize", fn);
   }, []);
@@ -127,7 +128,7 @@ const Navigation: React.FC = () => {
 
           {/* Desktop nav */}
           <nav aria-label="Primary navigation"
-            className="hidden md:flex items-center gap-5 lg:gap-7">
+            className="hidden lg:flex items-center gap-5 xl:gap-7">
             {NAV_ITEMS.map(({ id, label, short }) => {
               const isActive = active === id;
               return (
@@ -153,7 +154,7 @@ const Navigation: React.FC = () => {
 
           {/* Connect CTA */}
           <a href="#contact" onClick={e => { e.preventDefault(); scrollTo("contact"); }}
-            className="hidden md:inline-flex items-center gap-1.5 font-mono text-[0.52rem]
+            className="hidden lg:inline-flex items-center gap-1.5 font-mono text-[0.52rem]
                        tracking-widest uppercase text-dim/70 border border-border/40
                        px-3 py-1.5 hover:border-signal hover:text-signal
                        transition-all duration-150 focus-visible:outline-signal shrink-0">
@@ -164,7 +165,7 @@ const Navigation: React.FC = () => {
           <button onClick={() => setMenuOpen(v => !v)}
             aria-expanded={menuOpen} aria-controls="mobile-menu"
             aria-label={menuOpen ? "Close navigation" : "Open navigation"}
-            className="md:hidden flex flex-col gap-[5px] p-2 focus-visible:outline-signal shrink-0">
+            className="lg:hidden flex flex-col gap-[5px] p-2 focus-visible:outline-signal shrink-0">
             <span className={["block w-5 h-[1.5px] bg-fog transition-all duration-200 origin-center",
               menuOpen ? "rotate-45 translate-y-[6.5px]" : ""].join(" ")} />
             <span className={["block w-5 h-[1.5px] bg-fog transition-all duration-200",

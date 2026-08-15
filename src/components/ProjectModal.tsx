@@ -101,6 +101,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
               <span className="hidden sm:block font-mono text-[0.48rem] text-dim/50 tracking-widest uppercase">
                 {count} systems in archive
               </span>
+              <span className="w-px h-3 bg-border/40 hidden sm:block" aria-hidden="true" />
+              <span className="hidden sm:inline-flex items-center gap-1.5 font-mono text-[0.48rem] text-signal/80 tracking-widest uppercase">
+                <span className="h-1 w-1 rounded-full bg-signal" aria-hidden="true" />
+                verified
+              </span>
             </div>
             <button
               ref={closeBtnRef}
