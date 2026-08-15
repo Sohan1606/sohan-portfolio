@@ -1,4 +1,4 @@
-﻿// Navigation.tsx — SOHAN // SYSTEM 3.0
+// Navigation.tsx — SOHAN // SYSTEM 3.0
 // Instrument panel. Minimal. Precise. System-language.
 import React, { useState, useEffect, useRef } from "react";
 import { useActiveSection } from "../hooks/useActiveSection";
@@ -6,17 +6,18 @@ import { useScrollLock } from "../hooks/useScrollLock";
 import { useSystemState } from "../hooks/useSystemState";
 
 const SECTION_IDS = [
-  "hero","identity","stack","work","lab","journey","now","contact",
+  "hero","identity","manifesto","stack","work","lab","journey","now","contact",
 ];
 
 const NAV_ITEMS = [
-  { id: "identity", label: "Identity", short: "01" },
-  { id: "stack",    label: "Stack",    short: "02" },
-  { id: "work",     label: "Work",     short: "03" },
-  { id: "lab",      label: "Lab",      short: "04" },
-  { id: "journey",  label: "Journey",  short: "05" },
-  { id: "now",      label: "Now",      short: "06" },
-  { id: "contact",  label: "Connect",  short: "07" },
+  { id: "identity",  label: "Identity",   short: "01" },
+  { id: "manifesto", label: "Manifesto",  short: "02" },
+  { id: "stack",     label: "Stack",      short: "03" },
+  { id: "work",      label: "Work",       short: "04" },
+  { id: "lab",       label: "Build Lab",  short: "05" },
+  { id: "journey",   label: "Path",       short: "06" },
+  { id: "now",       label: "Now",        short: "07" },
+  { id: "contact",   label: "Connect",    short: "08" },
 ];
 
 function scrollTo(id: string) {

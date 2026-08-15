@@ -5,7 +5,9 @@ import CustomCursor from "./components/CustomCursor";
 import ScrollProgress from "./components/ScrollProgress";
 import Grain from "./components/Grain";
 import Hero from "./sections/Hero";
+import TechMarquee from "./components/TechMarquee";
 import Identity from "./sections/Identity";
+import Manifesto from "./sections/Manifesto";
 import Stack from "./sections/Stack";
 import Work from "./sections/Work";
 import Lab from "./sections/Lab";
@@ -51,7 +53,9 @@ function App() {
         <Navigation />
         <main id="main-content">
           <Hero />
+          <TechMarquee />
           <Identity />
+          <Manifesto />
           <Stack />
           <Work />
           <Lab />

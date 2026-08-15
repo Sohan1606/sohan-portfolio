@@ -1,4 +1,4 @@
-﻿// Stack.tsx — SOHAN // SYSTEM 2.0 + hover usage tooltips
+// Stack.tsx — SOHAN // SYSTEM 2.0 + hover usage tooltips
 // Technology hover reveals where/how it was used in actual projects.
 import React, { useState } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
@@ -61,7 +61,11 @@ const TechRow: React.FC<TechRowProps> = ({ index, name, category, note, where, t
     <motion.div variants={rowVariant} className="group relative"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}>
-      <div className="flex items-center gap-4 md:gap-6 py-3.5 border-b border-border/20 cursor-default">
+      <div tabIndex={0}
+        onFocus={() => setHovered(true)}
+        onBlur={() => setHovered(false)}
+        aria-label={type === "built" ? `${name} — used in ${where}` : `${name} — ${note}`}
+        className="flex items-center gap-4 md:gap-6 py-3.5 border-b border-border/20 cursor-default">
         <span className={`font-mono text-[0.5rem] tracking-widest w-5 shrink-0 transition-colors duration-200
                           ${hovered ? "text-signal" : "text-dim/40"}`}>{index}</span>
         <span className={`font-sans font-semibold text-sm md:text-base tracking-tight min-w-0 flex-1
@@ -100,6 +104,59 @@ const TechRow: React.FC<TechRowProps> = ({ index, name, category, note, where, t
   );
 };
 
+interface TowardRowProps {
+  index: string; name: string; note: string;
+}
+
+// "Building toward" rows — the reference site's skills hover, mapped onto
+// the learning direction list: hover (or keyboard focus) swaps the note
+// into view and raises the signal, same as the "Built with" rows.
+const TowardRow: React.FC<TowardRowProps> = ({ index, name, note }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div variants={rowVariant} className="group relative"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}>
+      <div tabIndex={0}
+        onFocus={() => setHovered(true)}
+        onBlur={() => setHovered(false)}
+        aria-label={`${name} — ${note}`}
+        className="flex items-center gap-4 md:gap-6 py-3.5 border-b border-border/[0.12] cursor-default">
+        <span className={`font-mono text-[0.5rem] tracking-widest w-5 shrink-0 transition-colors duration-200
+                          ${hovered ? "text-signal" : "text-dim/25"}`}>{index}</span>
+        <span className={`font-sans font-semibold text-sm md:text-base tracking-tight min-w-0 flex-1
+                          transition-colors duration-200
+                          ${hovered ? "text-fog" : "text-fog/35"}`}>{name}</span>
+
+        {/* Note — appears on hover / focus */}
+        <div className="hidden sm:block w-52 shrink-0 overflow-hidden">
+          {hovered ? (
+            <motion.span initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.15 }}
+              className="font-mono text-[0.45rem] text-signal/70 tracking-wide block">
+              ↳ {note}
+            </motion.span>
+          ) : (
+            <span className="font-mono text-[0.5rem] text-dim/30 tracking-widest uppercase">
+              Direction
+            </span>
+          )}
+        </div>
+
+        <span className={`hidden md:block font-mono text-[0.45rem] tracking-widest uppercase shrink-0
+                          transition-colors duration-200
+                          ${hovered ? "text-signal" : "text-muted/40"}`}>
+          Building toward
+        </span>
+        <span className={`font-mono text-[0.6rem] shrink-0 transition-all duration-150
+                          ${hovered ? "text-signal opacity-100 translate-x-0.5" : "text-border/50 opacity-0"}`}
+          aria-hidden="true">→</span>
+      </div>
+    </motion.div>
+  );
+};
+
 const Stack: React.FC = () => {
   const shouldReduce = useReducedMotion();
   const reveal   = makeReveal(shouldReduce);
@@ -115,7 +172,7 @@ const Stack: React.FC = () => {
       <div className="editorial py-section">
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}>
-          <SystemLabel number="02" label="Stack" />
+          <SystemLabel number="03" label="Stack" />
         </motion.div>
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}
@@ -136,7 +193,7 @@ const Stack: React.FC = () => {
               "Curiosity is part of the stack."
             </p>
             <p className="font-mono text-[0.45rem] text-dim/30 tracking-widest mt-1">
-              Hover any technology to see where it was used →
+              Hover or focus any technology to see where it was used →
             </p>
           </div>
         </motion.div>
@@ -178,18 +235,7 @@ const Stack: React.FC = () => {
             <span className="font-mono text-[0.45rem] text-dim/30 tracking-widest">current direction</span>
           </motion.div>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={VP_CLOSE}>
-            {BUILDING_TOWARD.map(t => (
-              <motion.div key={t.index} variants={rowVariant}>
-                <div className="flex items-center gap-4 md:gap-6 py-3.5 border-b border-border/[0.12] cursor-default">
-                  <span className="font-mono text-[0.45rem] text-dim/25 tracking-widest w-5 shrink-0">{t.index}</span>
-                  <span className="font-sans font-medium text-fog/35 text-sm md:text-base tracking-tight flex-1">{t.name}</span>
-                  <span className="hidden md:block font-mono text-[0.45rem] text-dim/25 tracking-widest uppercase shrink-0">
-                    Building toward</span>
-                  <span className="hidden xl:block font-mono text-[0.45rem] text-dim/25 tracking-wide text-right w-44 shrink-0">
-                    {t.note}</span>
-                </div>
-              </motion.div>
-            ))}
+            {BUILDING_TOWARD.map(t => <TowardRow key={t.index} {...t} />)}
           </motion.div>
         </div>
 

@@ -99,7 +99,7 @@ const Contact: React.FC = () => {
       <div className="editorial py-section relative">
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}>
-          <SystemLabel number="07" label="Contact" />
+          <SystemLabel number="08" label="Contact" />
         </motion.div>
 
         {/* System open channel */}
