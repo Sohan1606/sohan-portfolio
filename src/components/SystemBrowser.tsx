@@ -184,7 +184,7 @@ const SystemBrowser: React.FC<SystemBrowserProps> = ({ systems, onStepOut, inter
               Section 03 / Terminal
             </p>
             <h3 className="font-sans font-black tracking-tighter leading-[0.88] text-[clamp(2.6rem,7vw,8rem)] text-fog">
-              Welcome to<br />Deployment Line
+              Welcome to<br />Sohan Terminal
             </h3>
           </div>
           <div className="lg:col-span-4 lg:col-start-9">
@@ -322,7 +322,7 @@ const SystemBrowser: React.FC<SystemBrowserProps> = ({ systems, onStepOut, inter
                   ))}
                 </div>
                 <p className="font-mono text-[0.48rem] tracking-[0.18em] uppercase text-dim leading-relaxed">
-                  RED LINE // ENGINEERING ROUTE<br />built in React /// powered by caffeine
+                  RED LINE // DEPLOYMENT ROUTE<br />built in React /// powered by caffeine
                 </p>
               </div>
             </div>

@@ -146,7 +146,7 @@ const Journey: React.FC = () => {
 
         {/* HOW I BUILD */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}>
-          <SystemLabel number="06" label="Process" />
+          <SystemLabel number="07" label="Process" />
         </motion.div>
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}
@@ -208,7 +208,7 @@ const Journey: React.FC = () => {
         {/* BUILD LOG */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}
           className="mt-14 md:mt-20">
-          <SystemLabel number="06" label="Engineering Path" />
+          <SystemLabel number="07" label="Engineering Path" />
         </motion.div>
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}

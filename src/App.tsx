@@ -5,8 +5,10 @@ import CustomCursor from "./components/CustomCursor";
 import ScrollProgress from "./components/ScrollProgress";
 import Grain from "./components/Grain";
 import Hero from "./sections/Hero";
+import DevLab from "./sections/DevLab";
 import TechMarquee from "./components/TechMarquee";
 import Identity from "./sections/Identity";
+import OpenRepo from "./sections/OpenRepo";
 import Manifesto from "./sections/Manifesto";
 import Stack from "./sections/Stack";
 import Work from "./sections/Work";
@@ -53,8 +55,10 @@ function App() {
         <Navigation />
         <main id="main-content">
           <Hero />
+          <DevLab />
           <TechMarquee />
           <Identity />
+          <OpenRepo />
           <Manifesto />
           <Work />
           <Lab />

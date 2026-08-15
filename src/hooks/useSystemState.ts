@@ -6,6 +6,7 @@ import { useMemo } from "react";
 const STATE_MAP: Record<string, string> = {
   hero:     "INITIALIZING",
   identity: "ORIGIN_TRACE",
+  openrepo: "READING_COMMITS",
   manifesto:"OPERATING_RULES",
   work:     "DEPLOYMENT_LINE",
   lab:      "ARCHIVE_MODE",
