@@ -6,15 +6,15 @@ import { useScrollLock } from "../hooks/useScrollLock";
 import { useSystemState } from "../hooks/useSystemState";
 
 const SECTION_IDS = [
-  "hero","identity","manifesto","stack","work","lab","journey","now","contact",
+  "hero","identity","manifesto","work","lab","stack","journey","now","contact",
 ];
 
 const NAV_ITEMS = [
-  { id: "identity",  label: "Identity",   short: "01" },
-  { id: "manifesto", label: "Manifesto",  short: "02" },
-  { id: "stack",     label: "Stack",      short: "03" },
-  { id: "work",      label: "Work",       short: "04" },
-  { id: "lab",       label: "Build Lab",  short: "05" },
+  { id: "identity",  label: "Origin",     short: "01" },
+  { id: "manifesto", label: "Rules",      short: "02" },
+  { id: "work",      label: "Best Work",  short: "03" },
+  { id: "lab",       label: "Archive",    short: "04" },
+  { id: "stack",     label: "Stack",      short: "05" },
   { id: "journey",   label: "Path",       short: "06" },
   { id: "now",       label: "Now",        short: "07" },
   { id: "contact",   label: "Connect",    short: "08" },

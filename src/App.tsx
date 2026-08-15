@@ -56,9 +56,9 @@ function App() {
           <TechMarquee />
           <Identity />
           <Manifesto />
-          <Stack />
           <Work />
           <Lab />
+          <Stack />
           <Journey />
           <Now />
           <Contact />

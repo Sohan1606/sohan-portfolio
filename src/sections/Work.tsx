@@ -159,40 +159,34 @@ const Work: React.FC = () => {
       <div className="editorial py-section">
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}>
-          <SystemLabel number="04" label="Best Work" />
+          <SystemLabel number="03" label="Best Work" />
         </motion.div>
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}
-          className="mt-10 md:mt-14">
-          <SplitText
-            text="Built. Shipped. Proven."
-            className="font-sans font-black text-display-xl text-fog tracking-tighter leading-none"
-          />
-        </motion.div>
-
-        <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}
-          className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-4">
+          className="mt-10 md:mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
           <div className="lg:col-span-6">
-            <span className="accent-line block mb-4" />
-            <p className="font-sans text-fog/50 font-light leading-relaxed text-base md:text-lg">
-              Every system here is a real artifact — with real authentication, real
-              encryption and a real deployment address. Click any row to dissect
-              the architecture.
+            <p className="font-mono text-[0.55rem] text-signal tracking-[0.22em] uppercase mb-4">
+              Section 03 / Alpha
             </p>
+            <SplitText
+              text="Best Work"
+              className="font-sans font-black text-display-xl text-fog tracking-tighter leading-none"
+            />
           </div>
-          <div className="lg:col-span-4 lg:col-start-9 flex items-end">
-            <div className="flex flex-col gap-1">
-              <span className="font-mono text-[0.5rem] text-dim/40 tracking-widest uppercase">
-                Jump to strongest
-              </span>
-              <button onClick={() => open("lastkey")}
-                aria-label="Open LastKey Digital Legacy case study"
-                className="font-mono text-[0.55rem] text-signal tracking-widest uppercase
-                           hover:underline underline-offset-4 focus-visible:outline-signal
-                           text-left">
-                → LastKey Digital Legacy
-              </button>
-            </div>
+          <div className="lg:col-span-5 lg:col-start-8 flex flex-col justify-end gap-4">
+            <span className="accent-line block" />
+            <p className="font-sans text-fog/58 font-light leading-relaxed text-base md:text-lg">
+              Worth a look. But if you're short on time, go straight to the
+              deployment line and step out into LastKey — Sohan's strongest
+              security-heavy build.
+            </p>
+            <button onClick={() => open("lastkey")}
+              aria-label="Open LastKey Digital Legacy case study"
+              className="self-start font-mono text-[0.55rem] text-signal tracking-widest uppercase
+                         hover:underline underline-offset-4 focus-visible:outline-signal
+                         text-left">
+              → jump straight to strongest
+            </button>
           </div>
         </motion.div>
 
@@ -217,11 +211,11 @@ const Work: React.FC = () => {
           className="mt-12 md:mt-16">
           <div className="flex items-center gap-3 mb-4">
             <span className="font-mono text-[0.55rem] text-signal tracking-widest uppercase">
-              // System Route
+              // Deployment Line
             </span>
             <span className="flex-1 h-px bg-border/20" aria-hidden="true" />
             <span className="font-mono text-[0.5rem] text-dim/30 tracking-widest hidden sm:block">
-              step out to dissect any system
+arrow keys browse · enter dissects
             </span>
           </div>
           <SystemBrowser systems={gallery} onStepOut={open} interactive={!activeId} />
