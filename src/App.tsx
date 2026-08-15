@@ -1,6 +1,9 @@
-﻿import { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import Navigation from "./components/Navigation";
 import SystemBoot from "./components/SystemBoot";
+import CustomCursor from "./components/CustomCursor";
+import ScrollProgress from "./components/ScrollProgress";
+import Grain from "./components/Grain";
 import Hero from "./sections/Hero";
 import Identity from "./sections/Identity";
 import Stack from "./sections/Stack";
@@ -36,6 +39,11 @@ function App() {
 
       {/* System boot sequence — fast, skippable, session-cached */}
       <SystemBoot onComplete={handleBoot} />
+
+      {/* SYSTEM 5.0 chrome — cursor, scroll depth, film grain */}
+      <CustomCursor />
+      <ScrollProgress />
+      <Grain />
 
       {/* Main content — visible immediately in DOM for SEO, shown after boot */}
       <div className={booted ? "opacity-100" : "opacity-0"}

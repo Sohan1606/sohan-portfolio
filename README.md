@@ -1,75 +1,59 @@
-# React + TypeScript + Vite
+# SOHAN // SYSTEM 5.0
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal developer operating system — portfolio for **Sohan Khachane**,
+a 4th-year Computer Engineering student focused on **Cloud Engineering,
+DevOps, DevSecOps and Software Engineering**.
 
-Currently, two official plugins are available:
+> SOHAN // SYSTEM 5.0 — a personal developer operating system.
+> Black screen. White type. Red signals. Real projects. Real systems.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+- **React 19** + **TypeScript**
+- **Vite** (build tool)
+- **Tailwind CSS** (design system)
+- **Framer Motion** (animation / motion architecture)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Getting started
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev      # local dev server
+npm run build    # type-check + production build
+npm run lint     # eslint
+npm run preview  # preview the production build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Structure
 
 ```
+src/
+  components/   # Navigation, SystemBoot, TerminalEgg, CustomCursor, ...
+  sections/     # Hero, Identity, Stack, Work, Lab, Journey, Now, Contact
+  hooks/        # useActiveSection, useEasterEggs, useScrollLock, ...
+  data/         # verified project + stack data (source of truth)
+  lib/          # shared motion variants
+  index.css     # global styles + design tokens
+```
+
+## Conventions
+
+- **No fabricated claims.** All project, stack and personal data is verified
+  from actual GitHub repositories. Nothing is invented to look stronger.
+- **Reduced-motion aware.** Boot sequence, cursor and large animations respect
+  `prefers-reduced-motion`.
+- **Accessible.** Semantic HTML, keyboard navigation, visible focus states,
+  `aria` labels, skip-to-content link.
+- **Security-minded.** No secrets in the frontend. All `target="_blank"` links
+  use `rel="noopener noreferrer"`. Easter-egg terminal is a safe client-side
+  simulation — no `eval`, no `Function()`, no unsafe HTML.
+
+## Deployment
+
+Canonical production URL:
+
+```
+https://sohan-portfolio-six.vercel.app/
+```
+
+Pushes to `main` trigger the Vercel deployment automatically.

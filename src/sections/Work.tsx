@@ -1,4 +1,4 @@
-﻿// Work.tsx — SOHAN // SYSTEM 2.1
+// Work.tsx — SOHAN // SYSTEM 2.1
 // Build archive. Engineering artifacts, not project cards.
 // Verified project data only. No fabricated claims.
 import React, { useState } from "react";
@@ -69,6 +69,7 @@ const HeroProject: React.FC<{ project: Project }> = ({ project }) => {
             {project.live && (
               <a href={project.live} target="_blank" rel="noopener noreferrer"
                 aria-label={`Open ${project.name} live deployment`}
+                data-cursor="project"
                 className="group inline-flex items-center gap-2 font-mono text-[0.55rem]
                            tracking-widest uppercase text-fog/60 hover:text-signal
                            transition-colors duration-200 focus-visible:outline-signal">
@@ -80,6 +81,7 @@ const HeroProject: React.FC<{ project: Project }> = ({ project }) => {
             {project.github && (
               <a href={project.github} target="_blank" rel="noopener noreferrer"
                 aria-label={`Open ${project.name} source repository`}
+                data-cursor="project"
                 className="group inline-flex items-center gap-2 font-mono text-[0.55rem]
                            tracking-widest uppercase text-dim hover:text-fog
                            transition-colors duration-200 focus-visible:outline-signal">

@@ -1,9 +1,10 @@
-﻿// Hero.tsx — SOHAN // SYSTEM 3.0
+// Hero.tsx — SOHAN // SYSTEM 3.0
 // Cinematic engineering entrance. Asymmetric. Confident.
 // Typography is the architecture. Red is the signal.
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import StatusDot from "../components/StatusDot";
+import Magnetic from "../components/Magnetic";
 import { makeSubtle, makeLine, containerVariants } from "../lib/motion";
 
 function scrollTo(id: string) {
@@ -148,7 +149,7 @@ const Hero: React.FC = () => {
       {/* System annotation — top right */}
       <div className="absolute top-[5.5rem] right-6 md:right-12 lg:right-16 xl:right-20
                       flex flex-col items-end gap-1 select-none" aria-hidden="true">
-        <span className="annotation">SK // SYS · v3.0</span>
+        <span className="annotation">SK // SYS · v5.0</span>
         <span className="annotation text-border/50">BUILD 2026</span>
       </div>
 
@@ -224,13 +225,16 @@ const Hero: React.FC = () => {
 
             {/* CTAs */}
             <motion.div variants={subtle} className="flex flex-col sm:flex-row gap-3 mb-8">
-              <button onClick={() => scrollTo("work")}
-                className="btn-signal inline-flex items-center gap-3 group"
-                aria-label="Jump to best work">
-                <span>View Best Work</span>
-                <span className="font-mono transition-transform duration-150
-                                 group-hover:translate-x-1" aria-hidden="true">→</span>
-              </button>
+              <Magnetic className="self-start">
+                <button onClick={() => scrollTo("work")}
+                  className="btn-signal inline-flex items-center gap-3 group"
+                  aria-label="Jump to best work"
+                  data-cursor="button">
+                  <span>View Best Work</span>
+                  <span className="font-mono transition-transform duration-150
+                                   group-hover:translate-x-1" aria-hidden="true">→</span>
+                </button>
+              </Magnetic>
               <button onClick={() => scrollTo("identity")}
                 className="btn-ghost inline-flex items-center gap-3 group"
                 aria-label="Explore portfolio">

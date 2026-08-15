@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -137,4 +137,101 @@
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
+}
+
+/* ============================================================
+   SOHAN // SYSTEM 5.0 — CUSTOM CURSOR
+   Only active on fine pointers without reduced motion.
+   ============================================================ */
+@media (hover: hover) and (pointer: fine) {
+  .has-cursor,
+  .has-cursor a,
+  .has-cursor button,
+  .has-cursor [role="button"],
+  .has-cursor input,
+  .has-cursor textarea,
+  .has-cursor select {
+    cursor: none;
+  }
+}
+
+.cursor-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cursor-dot {
+  background: var(--signal);
+  border-radius: 9999px;
+  transition: background-color 0.15s ease;
+}
+
+/* Ring outer is positioned via inline translate; inner carries visuals. */
+.cursor-ring__inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  transform: scale(0.5);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.cursor-layer--on .cursor-ring__inner {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── States ─────────────────────────────────────────────── */
+.cursor-ring__inner.cursor-state-link,
+.cursor-ring__inner.cursor-state-button {
+  border-color: rgba(220, 38, 38, 0.9);
+  transform: scale(1.35);
+  background: rgba(220, 38, 38, 0.08);
+}
+
+.cursor-ring__inner.cursor-state-project {
+  border-color: var(--signal);
+  transform: scale(1.8);
+  background: rgba(220, 38, 38, 0.12);
+}
+
+.cursor-ring__inner.cursor-state-text {
+  border-color: rgba(255, 255, 255, 0.75);
+  transform: scale(0.9);
+}
+
+.cursor-dot[data-cursor-state="link"],
+.cursor-dot[data-cursor-state="button"] {
+  background: #ffffff;
+}
+
+.cursor-dot[data-cursor-state="project"] {
+  background: var(--signal);
+}
+
+.cursor-dot[data-cursor-state="text"] {
+  background: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-ring__inner {
+    transition: none;
+  }
 }
