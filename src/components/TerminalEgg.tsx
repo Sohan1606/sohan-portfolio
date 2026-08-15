@@ -1,4 +1,4 @@
-﻿// TerminalEgg.tsx — SOHAN // SYSTEM
+// TerminalEgg.tsx — SOHAN // SYSTEM
 // Hidden terminal interface. Easter egg — not required for navigation.
 // Safe client-side command simulation. No eval. No dangerouslySetInnerHTML.
 // No filesystem access. No real shell execution.
@@ -128,7 +128,7 @@ const COMMANDS: Record<string, () => string[]> = {
     "  FOCUS  ........ CLOUD / DEVOPS / DEVSECOPS",
     "  PHASE  ........ 06 / NOW",
     "",
-    "sohan-khachane / v1.0 / 2025\u2013",
+    "sohan-khachane / v5.0 / 2026\u2013",
   ],
   whoami: () => [
     "",

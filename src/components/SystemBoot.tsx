@@ -1,14 +1,14 @@
-﻿// SystemBoot.tsx — SOHAN // SYSTEM 2.2
+// SystemBoot.tsx — SOHAN // SYSTEM 2.2
 // Opening ritual. Fast. Skippable. Session-cached. Unmount-safe.
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 const BOOT_LINES = [
-  { key: "identity", label: "IDENTITY", status: "OK" },
-  { key: "stack",    label: "STACK   ", status: "OK" },
-  { key: "work",     label: "WORK    ", status: "OK" },
-  { key: "lab",      label: "LAB     ", status: "OK" },
-  { key: "journey",  label: "JOURNEY ", status: "OK" },
+  { key: "init", label: "INITIALIZING",             status: "OK" },
+  { key: "core", label: "LOADING CORE",             status: "OK" },
+  { key: "work", label: "MOUNTING PROJECTS",        status: "OK" },
+  { key: "stack",label: "LOADING STACK",            status: "OK" },
+  { key: "conn", label: "ESTABLISHING CONNECTION",  status: "OK" },
 ];
 
 const DOTS = "...........";
@@ -85,7 +85,7 @@ const SystemBoot: React.FC<SystemBootProps> = ({ onComplete }) => {
             <div className="flex items-center gap-2 mb-8">
               <span className="w-1 h-1 rounded-full bg-signal" aria-hidden="true" />
               <span className="font-mono text-[0.55rem] text-signal tracking-widest uppercase">
-                SOHAN // SYSTEM
+                SOHAN // SYSTEM · v5.0
               </span>
             </div>
 
@@ -126,7 +126,7 @@ const SystemBoot: React.FC<SystemBootProps> = ({ onComplete }) => {
                 transition={{ duration: 0.15 }}
                 className="font-mono text-[0.65rem] text-signal tracking-widest mt-2"
               >
-                READY
+                SYSTEM READY
               </motion.p>
             )}
           </div>
