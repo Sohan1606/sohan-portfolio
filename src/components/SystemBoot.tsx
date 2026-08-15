@@ -22,6 +22,9 @@ const SystemBoot: React.FC<SystemBootProps> = ({ onComplete }) => {
   const [done, setDone]                 = useState(false);
   const mounted = useRef(true);
 
+  // Percentage derived from the boot sequence so the counter feels alive.
+  const pct = showReady ? 100 : Math.round((visibleCount / BOOT_LINES.length) * 100);
+
   useEffect(() => {
     mounted.current = true;
     return () => { mounted.current = false; };
@@ -82,10 +85,16 @@ const SystemBoot: React.FC<SystemBootProps> = ({ onComplete }) => {
           aria-live="polite"
         >
           <div className="max-w-xs">
-            <div className="flex items-center gap-2 mb-8">
-              <span className="w-1 h-1 rounded-full bg-signal" aria-hidden="true" />
-              <span className="font-mono text-[0.55rem] text-signal tracking-widest uppercase">
-                SOHAN // SYSTEM · v5.0
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-signal animate-pulse-red" aria-hidden="true" />
+                <span className="font-mono text-[0.55rem] text-signal tracking-widest uppercase">
+                  SOHAN // SYSTEM · v5.0
+                </span>
+              </div>
+              <span className="font-mono text-[0.9rem] font-bold text-fog tracking-tight"
+                aria-hidden="true">
+                {pct}%
               </span>
             </div>
 
@@ -129,6 +138,14 @@ const SystemBoot: React.FC<SystemBootProps> = ({ onComplete }) => {
                 SYSTEM READY
               </motion.p>
             )}
+
+            <div className="mt-6 h-px bg-border/30" aria-hidden="true">
+              <motion.div
+                className="h-px bg-signal"
+                animate={{ width: `${pct}%` }}
+                transition={{ duration: 0.1, ease: "linear" }}
+              />
+            </div>
           </div>
 
           <button

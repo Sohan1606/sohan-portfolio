@@ -5,6 +5,7 @@ import React, { useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import SystemLabel from "../components/SystemLabel";
 import ProjectModal from "../components/ProjectModal";
+import SystemBrowser from "../components/SystemBrowser";
 import SplitText from "../components/SplitText";
 import CountUp from "../components/CountUp";
 import { makeReveal, makeStagger, makeFadeItem, VP, VP_CLOSE } from "../lib/motion";
@@ -211,7 +212,22 @@ const Work: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* Gallery */}
+        {/* SYSTEM ROUTE — keyboard-navigable browser */}
+        <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP_CLOSE}
+          className="mt-12 md:mt-16">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="font-mono text-[0.55rem] text-signal tracking-widest uppercase">
+              // System Route
+            </span>
+            <span className="flex-1 h-px bg-border/20" aria-hidden="true" />
+            <span className="font-mono text-[0.5rem] text-dim/30 tracking-widest hidden sm:block">
+              step out to dissect any system
+            </span>
+          </div>
+          <SystemBrowser systems={gallery} onStepOut={open} interactive={!activeId} />
+        </motion.div>
+
+        {/* Gallery — full archive list */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}
           className="mt-14 md:mt-20">
           <div className="flex items-center gap-3 mb-1">
