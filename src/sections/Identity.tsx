@@ -14,11 +14,20 @@ const HUSTLE_LOG = [
   "Kept learning through lab builds: HH Goa PFP Generator, AI Product Generator and Financial Mirror AI.",
 ];
 
+// Verified: GitHub API shows 13 public repos under Sohan1606 (2026-08-15).
+const REPO_COUNT = 13;
+
 const PRINCIPLES = [
   { label: "Build", note: "Ship the smallest real version before polishing the imaginary one." },
   { label: "Secure", note: "Treat authentication, encryption and access control as architecture." },
   { label: "Deploy", note: "Localhost is rehearsal. Production is the test." },
   { label: "Iterate", note: "Every bug is system information if you trace it properly." },
+];
+
+const LEARNED = [
+  { value: "06", title: "Deployed Systems", note: "shipped to real cloud environments." },
+  { value: "40+", title: "Verified Tech Signals", note: "every badge traced to a real repo." },
+  { value: "05", title: "Agent Pipeline", note: "FairLoop's adversarial audit crew." },
 ];
 
 const Identity: React.FC = () => {
@@ -69,17 +78,29 @@ const Identity: React.FC = () => {
         </motion.div>
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP_CLOSE} className="mt-14 md:mt-20 grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Giant hero number — the reference's "186M+ VIEWS DRIVEN" beat */}
           <div className="lg:col-span-5">
             <p className="font-mono text-[0.52rem] tracking-[0.22em] uppercase text-dim mb-5">
               IN THE ARCHIVE
             </p>
-            <div className="grid grid-cols-3 border border-border/25 divide-x divide-border/25">
+            <div className="border border-border/25 bg-surface/25 p-6 md:p-10">
+              <span className="font-sans font-black text-[clamp(6rem,16vw,15rem)] tracking-[-0.06em] leading-none text-fog">
+                <CountUp to={REPO_COUNT} />
+              </span>
+              <span className="mt-3 block font-sans font-black text-[clamp(1.4rem,3vw,3rem)] tracking-tighter uppercase leading-none text-fog/85">
+                Repos shipped
+              </span>
+              <p className="mt-5 font-sans text-fog/48 font-light leading-relaxed">
+                crazy what happens when you just keep building.
+              </p>
+            </div>
+            <div className="mt-4 grid grid-cols-3 border border-border/25 divide-x divide-border/25">
               {stats.map((stat) => (
-                <div key={stat.label} className="p-4 md:p-6 min-h-32 flex flex-col justify-between bg-surface/25">
-                  <span className="font-sans font-black text-4xl md:text-6xl tracking-tighter text-fog leading-none">
+                <div key={stat.label} className="p-4 md:p-5 min-h-24 flex flex-col justify-between bg-base/40">
+                  <span className="font-sans font-black text-3xl md:text-4xl tracking-tighter text-fog leading-none">
                     <CountUp to={stat.value} suffix={stat.suffix} />
                   </span>
-                  <span className="font-mono text-[0.42rem] tracking-[0.18em] uppercase text-dim leading-relaxed">
+                  <span className="font-mono text-[0.4rem] tracking-[0.16em] uppercase text-dim leading-relaxed">
                     {stat.label}
                   </span>
                 </div>
@@ -98,6 +119,9 @@ const Identity: React.FC = () => {
               I obsess over how a product looks, but I care even more about what survives behind it:
               authentication, encryption, database boundaries, deployment, observability and failure modes.
               Beautiful UI matters most when the engineering underneath can hold pressure.
+            </p>
+            <p className="mt-6 font-sans font-semibold tracking-tight text-fog/85 text-lg md:text-xl">
+              Beautiful interfaces that actually hold under pressure.
             </p>
           </div>
         </motion.div>
@@ -146,6 +170,49 @@ const Identity: React.FC = () => {
                 ))}
               </div>
             </div>
+          </div>
+        </motion.div>
+
+        {/* learned a lot here — reference's personal-stats beat */}
+        <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP} className="mt-16 md:mt-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <div className="lg:col-span-4">
+              <p className="font-sans font-black tracking-[-0.03em] leading-[0.9] text-[clamp(2.6rem,6vw,6.5rem)] text-fog">
+                learned a lot<br />here
+              </p>
+              <p className="mt-5 font-mono text-[0.5rem] tracking-[0.18em] uppercase text-dim/70">
+                gotta keep the build green.
+              </p>
+              <p className="mt-1 font-mono text-[0.5rem] tracking-[0.18em] uppercase text-dim/50">
+                still figuring things out.
+              </p>
+            </div>
+            <div className="lg:col-span-7 lg:col-start-6 grid grid-cols-1 sm:grid-cols-3 border border-border/25 divide-y sm:divide-y-0 sm:divide-x divide-border/25">
+              {LEARNED.map((item) => (
+                <div key={item.title} className="p-5 md:p-6 bg-surface/25 flex flex-col justify-between min-h-36">
+                  <span className="font-sans font-black text-4xl md:text-5xl tracking-tighter text-fog leading-none">
+                    {item.value}
+                  </span>
+                  <div className="mt-4">
+                    <span className="block font-sans font-semibold text-sm tracking-tight text-fog/80">{item.title}</span>
+                    <span className="mt-1 block font-mono text-[0.45rem] tracking-[0.14em] uppercase text-dim leading-relaxed">{item.note}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* PS// note */}
+        <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP} className="mt-14 md:mt-20 grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div className="lg:col-span-2 pt-1">
+            <span className="font-mono text-[0.45rem] text-muted/35 tracking-widest uppercase">PS//</span>
+          </div>
+          <div className="lg:col-span-8">
+            <p className="font-sans text-fog/45 font-light leading-relaxed text-base md:text-lg">
+              The goal is simple: build systems that are useful, secure and deployed for the real world —
+              and keep every claim in this portfolio verifiable.
+            </p>
           </div>
         </motion.div>
       </div>

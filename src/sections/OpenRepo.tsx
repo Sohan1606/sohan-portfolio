@@ -240,6 +240,27 @@ const OpenRepo: React.FC = () => {
               git log --oneline --decorate<br />
               <span className="text-signal">04 commits · 4 chapters · 1 direction</span>
             </p>
+
+            {/* first-deploy polaroid — the reference's memory photo, redrawn as code */}
+            <div className="mt-10 max-w-[250px]">
+              <div className="inline-block -rotate-3 transition-transform duration-300
+                              hover:rotate-0 hover:scale-[1.02]">
+                <div className="bg-[#EDEDED] p-3 pb-4 shadow-[0_24px_60px_-18px_rgba(0,0,0,0.9)]">
+                  <div className="bg-void border border-border/60 p-3 font-mono text-[0.5rem] leading-relaxed">
+                    <p className="text-signal">$ git commit -m "first ship"</p>
+                    <p className="text-fog/55">[main 000001] first ship</p>
+                    <p className="text-fog/55">  3 files changed, 217 insertions(+)</p>
+                    <p className="text-signal/80">→ deployed to production ✓</p>
+                  </div>
+                  <p className="mt-2.5 text-center font-mono text-[0.42rem] tracking-[0.2em] uppercase text-[#1a1a1a]/70">
+                    sohan — early phase
+                  </p>
+                </div>
+              </div>
+              <p className="mt-4 font-mono text-[0.45rem] tracking-[0.16em] uppercase text-dim/50 leading-loose">
+                how it all started. first green build. SHIP IT.
+              </p>
+            </div>
           </div>
         </motion.div>
 

@@ -13,6 +13,7 @@ interface SystemBrowserProps {
 
 interface LineMeta {
   station: string;
+  stationSub: string;
   route: string;
   next: string;
   bullets: string[];
@@ -22,6 +23,7 @@ interface LineMeta {
 const LINE_META: Record<string, LineMeta> = {
   lastkey: {
     station: "LASTKEY",
+    stationSub: "DIGITAL",
     route: "Zero-Knowledge",
     next: "FAIRLOOP",
     bullets: [
@@ -37,6 +39,7 @@ const LINE_META: Record<string, LineMeta> = {
   },
   fairloop: {
     station: "FAIRLOOP",
+    stationSub: "AGENTS",
     route: "Agentic AI",
     next: "CLOUD COMPLAINT",
     bullets: [
@@ -52,6 +55,7 @@ const LINE_META: Record<string, LineMeta> = {
   },
   "cloud-complaint": {
     station: "CLOUD",
+    stationSub: "COMPLAINT",
     route: "Cloud Native",
     next: "SENTRA",
     bullets: [
@@ -67,6 +71,7 @@ const LINE_META: Record<string, LineMeta> = {
   },
   sentra: {
     station: "SENTRA",
+    stationSub: "INCIDENTS",
     route: "Incident Ops",
     next: "QMEET",
     bullets: [
@@ -82,6 +87,7 @@ const LINE_META: Record<string, LineMeta> = {
   },
   qmeet: {
     station: "QMEET",
+    stationSub: "MEETING",
     route: "Meeting AI",
     next: "TERMINUS",
     bullets: [
@@ -99,6 +105,7 @@ const LINE_META: Record<string, LineMeta> = {
 
 const fallbackMeta = (project: Project, next: Project): LineMeta => ({
   station: project.name.toUpperCase().split(" ")[0],
+  stationSub: project.name.toUpperCase().split(" ").slice(1).join(" "),
   route: project.type,
   next: next.name.toUpperCase().split(" ")[0],
   bullets: [project.tagline, project.problem, project.approach].filter(Boolean).slice(0, 3),
@@ -117,6 +124,7 @@ const SystemBrowser: React.FC<SystemBrowserProps> = ({ systems, onStepOut, inter
 
   const activeMeta = useMemo(() => LINE_META[active.id] ?? fallbackMeta(active, next), [active, next]);
   const stationLabels = useMemo(() => systems.map((system) => LINE_META[system.id]?.station ?? system.name.toUpperCase().split(" ")[0]), [systems]);
+  const stationSubs = useMemo(() => systems.map((system) => LINE_META[system.id]?.stationSub ?? ""), [systems]);
 
   const go = useCallback((dir: 1 | -1) => {
     setIdx((prev) => (prev + dir + systems.length) % systems.length);
@@ -152,12 +160,13 @@ const SystemBrowser: React.FC<SystemBrowserProps> = ({ systems, onStepOut, inter
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-6">
           {stationLabels.map((station, index) => {
             const activeStation = index === idx;
+            const sub = stationSubs[index];
             return (
               <button
                 key={`${station}-${index}`}
                 onClick={() => setIdx(index)}
                 className="group text-left focus-visible:outline-signal"
-                aria-label={`Go to ${station}`}
+                aria-label={`Go to ${station}${sub ? ` ${sub}` : ""}`}
               >
                 <span className={[
                   "block font-sans font-black uppercase leading-none tracking-[-0.055em] text-[clamp(1.45rem,3.4vw,3.7rem)] transition-colors",
@@ -166,6 +175,15 @@ const SystemBrowser: React.FC<SystemBrowserProps> = ({ systems, onStepOut, inter
                 >
                   {station}
                 </span>
+                {sub && (
+                  <span className={[
+                    "block font-sans font-black uppercase leading-none tracking-[-0.04em] text-[clamp(0.75rem,1.5vw,1.5rem)] ml-[0.4em] mt-1 transition-colors",
+                    activeStation ? "text-fog/75" : "text-fog/14 group-hover:text-fog/45",
+                  ].join(" ")}
+                  >
+                    {sub}
+                  </span>
+                )}
                 <span className={[
                   "mt-2 block h-px transition-colors",
                   activeStation ? "bg-signal" : "bg-border/40 group-hover:bg-fog/30",
@@ -181,7 +199,7 @@ const SystemBrowser: React.FC<SystemBrowserProps> = ({ systems, onStepOut, inter
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
           <div className="lg:col-span-7">
             <p className="font-mono text-[0.52rem] tracking-[0.22em] uppercase text-dim mb-3">
-              Section 03 / Terminal
+              Section 04 / Terminal
             </p>
             <h3 className="font-sans font-black tracking-tighter leading-[0.88] text-[clamp(2.6rem,7vw,8rem)] text-fog">
               Welcome to<br />Sohan Terminal
@@ -192,9 +210,18 @@ const SystemBrowser: React.FC<SystemBrowserProps> = ({ systems, onStepOut, inter
               <span className="font-mono text-[0.46rem] tracking-[0.2em] uppercase text-white/75">instruction manual</span>
               <span className="font-sans font-black text-2xl tracking-tighter leading-none">ENTER TERMINAL</span>
             </div>
-            <p className="mt-4 font-mono text-[0.48rem] tracking-[0.18em] uppercase text-dim leading-relaxed">
-              Arrow keys browse systems. Red button opens the full dissection.
-            </p>
+            <div className="mt-4 grid grid-cols-3 gap-2">
+              {[
+                { key: "SWIPE L/R", note: "Arrow keys browse systems." },
+                { key: "STEP OUT", note: "Red button deep-dives the project." },
+                { key: "MIND GAP", note: "Deployments can fail. Read the notes." },
+              ].map((item) => (
+                <div key={item.key} className="border border-border/25 bg-deep/60 p-3">
+                  <span className="block font-mono text-[0.44rem] tracking-[0.14em] uppercase text-signal">{item.key}</span>
+                  <span className="mt-1.5 block font-sans text-fog/40 font-light text-[0.7rem] leading-relaxed">{item.note}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -321,9 +348,26 @@ const SystemBrowser: React.FC<SystemBrowserProps> = ({ systems, onStepOut, inter
                     />
                   ))}
                 </div>
-                <p className="font-mono text-[0.48rem] tracking-[0.18em] uppercase text-dim leading-relaxed">
-                  RED LINE // DEPLOYMENT ROUTE<br />built in React /// powered by caffeine
+                <p className="font-mono text-[0.48rem] tracking-[0.18em] uppercase text-dim leading-loose">
+                  operated by a 4th-year engineering student
+                  <br />
+                  <span className="text-fog/55">RED LINE // DEPLOYMENT ROUTE</span>
+                  <br />built in React /// powered by caffeine
+                  <br />
+                  <span className="text-dim/60">caution: this terminal keeps running after 00:00 due to a late-night coding habit</span>
                 </p>
+                <button
+                  onClick={() => {
+                    const el = document.getElementById("work");
+                    if (el) el.scrollIntoView({ behavior: shouldReduce ? "auto" : "smooth", block: "start" });
+                  }}
+                  className="mt-4 font-mono text-[0.5rem] tracking-[0.2em] uppercase text-signal
+                             hover:underline underline-offset-4 transition-colors
+                             focus-visible:outline-signal"
+                  data-cursor="button"
+                >
+                  ← Return to Platform
+                </button>
               </div>
             </div>
           </div>

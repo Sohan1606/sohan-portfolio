@@ -32,9 +32,10 @@ const StatusBadge: React.FC<{ status: Project["status"] }> = ({ status }) => {
 };
 
 // ── STATS STRIP — truthful aggregates from the verified archive ─────
+// 13 = public repos under Sohan1606 (GitHub API, 2026-08-15).
 const ARCHIVE_STATS = [
   { key: "deployed", to: 6, pad: 2, suffix: "",       label: "Systems deployed" },
-  { key: "repos",    to: 12, pad: 2, suffix: "+",     label: "Repositories" },
+  { key: "repos",    to: 13, pad: 2, suffix: "",      label: "Repositories" },
   { key: "areas",    to: 5, pad: 2, suffix: "",       label: "Engineering areas" },
   { key: "rule",     to: 1, pad: 2, suffix: "",       label: "Rule · build real" },
 ];
@@ -166,7 +167,7 @@ const Work: React.FC = () => {
           className="mt-10 md:mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
           <div className="lg:col-span-6">
             <p className="font-mono text-[0.55rem] text-signal tracking-[0.22em] uppercase mb-4">
-              Section 03 / Alpha
+              Section 04 / Alpha
             </p>
             <SplitText
               text="Best Work"
