@@ -1,16 +1,13 @@
-﻿// StatusDot — animated red indicator
+﻿// StatusDot.tsx — SOHAN // SYSTEM 3.0
 import React from "react";
 
-interface StatusDotProps {
-  label?: string;
-  className?: string;
-}
+interface StatusDotProps { label?: string; className?: string; }
 
 const StatusDot: React.FC<StatusDotProps> = ({ label, className = "" }) => (
-  <span className={`inline-flex items-center gap-2 ${className}`}>
+  <span className={`inline-flex items-center gap-1.5 ${className}`}>
     <span className="status-dot" aria-hidden="true" />
     {label && (
-      <span className="font-mono text-[0.6rem] text-signal tracking-widest uppercase">
+      <span className="font-mono text-[0.5rem] text-signal tracking-widest uppercase">
         {label}
       </span>
     )}
