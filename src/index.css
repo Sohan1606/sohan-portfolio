@@ -140,6 +140,33 @@
 }
 
 /* ============================================================
+   SOHAN // SYSTEM 5.0 — TECH MARQUEE
+   Seamless -50% loop. Pauses on hover. Static under reduced
+   motion (the global reduced-motion rule also zeroes it out).
+   ============================================================ */
+.marquee__track {
+  animation: marquee-scroll 36s linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee__track,
+.marquee:focus-within .marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+    transform: none;
+  }
+}
+
+/* ============================================================
    SOHAN // SYSTEM 5.0 — CUSTOM CURSOR
    Only active on fine pointers without reduced motion.
    ============================================================ */

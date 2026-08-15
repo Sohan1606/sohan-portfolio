@@ -1,4 +1,4 @@
-﻿// Lab.tsx — SOHAN // SYSTEM 3.0
+// Lab.tsx — SOHAN // SYSTEM 3.0
 // EXPERIMENTAL zone. Different visual language from Work.
 // Things being tested. Things being broken. Things being rebuilt.
 import React, { useState } from "react";
@@ -106,20 +106,20 @@ const Lab: React.FC = () => {
   const fadeItem = makeFadeItem(shouldReduce);
 
   return (
-    <section id="lab" aria-label="Lab"
+    <section id="lab" aria-label="Build Lab"
       className="relative bg-base border-t border-border/25">
       <div className="section-rule" aria-hidden="true" />
 
       <div className="editorial py-section">
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}>
-          <SystemLabel number="04" label="Lab" />
+          <SystemLabel number="05" label="Build Lab" />
         </motion.div>
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}
           className="mt-10 md:mt-14">
           <p className="font-mono text-[0.5rem] text-signal tracking-widest uppercase mb-3">
-            // EXPERIMENTAL · UNSTABLE · IN PROGRESS
+            // BUILD LAB · EXPERIMENTAL · UNSTABLE · IN PROGRESS
           </p>
           <h2 className="font-sans font-black text-display-xl text-fog/65
                          tracking-tighter leading-none">

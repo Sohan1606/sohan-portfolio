@@ -138,7 +138,7 @@ const Journey: React.FC = () => {
   const fadeItem = makeFadeItem(shouldReduce);
 
   return (
-    <section id="journey" aria-label="Journey and process"
+    <section id="journey" aria-label="Engineering path and process"
       className="relative bg-base border-t border-border/25">
       <div className="section-rule" aria-hidden="true" />
 
@@ -146,7 +146,7 @@ const Journey: React.FC = () => {
 
         {/* HOW I BUILD */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}>
-          <SystemLabel number="05" label="Process" />
+          <SystemLabel number="06" label="Process" />
         </motion.div>
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}
@@ -208,13 +208,13 @@ const Journey: React.FC = () => {
         {/* BUILD LOG */}
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}
           className="mt-14 md:mt-20">
-          <SystemLabel number="05" label="Build Log" />
+          <SystemLabel number="06" label="Engineering Path" />
         </motion.div>
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}
           className="mt-10 md:mt-14">
           <p className="font-mono text-[0.5rem] text-signal tracking-widest uppercase mb-3">
-            // ENGINEERING EVOLUTION
+            // ENGINEERING PATH · EVOLUTION
           </p>
           <SplitText
             text="Where I've been. Where I'm going."
