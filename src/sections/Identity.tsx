@@ -1,9 +1,10 @@
-﻿// Identity.tsx — SOHAN // SYSTEM 3.0
+// Identity.tsx — SOHAN // SYSTEM 3.0
 // An engineering story. Not an About page.
 // WHO / HOW / WHY / DIRECTION
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SystemLabel from "../components/SystemLabel";
+import SplitText from "../components/SplitText";
 import { makeReveal, makeStagger, makeFadeItem, VP, VP_CLOSE, VP_NEAR } from "../lib/motion";
 
 const ENGINEERING_PRINCIPLES = [
@@ -64,10 +65,10 @@ const Identity: React.FC = () => {
           <p className="font-mono text-[0.5rem] text-signal tracking-widest uppercase mb-3">
             // ENGINEER IN PROGRESS
           </p>
-          <h2 className="font-sans font-black text-display-xl text-fog
-                         tracking-tighter leading-none">
-            An engineer<br />in progress.
-          </h2>
+          <SplitText
+            text="An engineer in progress."
+            className="font-sans font-black text-display-xl text-fog tracking-tighter leading-none"
+          />
         </motion.div>
 
         {/* Two-column */}

@@ -1,9 +1,10 @@
-﻿// Journey.tsx — SOHAN // SYSTEM 3.0
+// Journey.tsx — SOHAN // SYSTEM 3.0
 // BUILD LOG — not a resume timeline.
 // Engineering evolution, not a CV.
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SystemLabel from "../components/SystemLabel";
+import SplitText from "../components/SplitText";
 import { makeReveal, makeStagger, makeFadeItem, VP, VP_CLOSE } from "../lib/motion";
 
 const PIPELINE = [
@@ -215,11 +216,10 @@ const Journey: React.FC = () => {
           <p className="font-mono text-[0.5rem] text-signal tracking-widest uppercase mb-3">
             // ENGINEERING EVOLUTION
           </p>
-          <h2 className="font-sans font-black text-display-xl text-fog
-                         tracking-tighter leading-none">
-            Where I've been.<br />
-            <span className="text-signal">Where I'm going.</span>
-          </h2>
+          <SplitText
+            text="Where I've been. Where I'm going."
+            className="font-sans font-black text-display-xl text-fog tracking-tighter leading-none"
+          />
         </motion.div>
 
         <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={VP}

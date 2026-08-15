@@ -1,6 +1,6 @@
 // Contact.tsx — SOHAN // SYSTEM 3.0
 // Open channel. Confident endpoint. Not a generic form.
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SystemLabel from "../components/SystemLabel";
 import StatusDot from "../components/StatusDot";
@@ -35,26 +35,50 @@ interface LinkRowProps { label: string; sub: string; href: string; aria: string;
 
 const LinkRow: React.FC<LinkRowProps> = ({ label, sub, href, aria }) => {
   const [hovered, setHovered] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const copyHandle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard?.writeText(sub).then(() => {
+      setCopied(true);
+      if (timer.current) clearTimeout(timer.current);
+      timer.current = setTimeout(() => setCopied(false), 1600);
+    }).catch(() => {});
+  };
+
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" aria-label={aria}
-      className="group block border-b border-border/20 last:border-b-0
-                 focus-visible:outline-signal"
+    <div className="group relative border-b border-border/20 last:border-b-0"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}>
-      <div className="flex items-center gap-6 py-5">
-        <div className="flex-1 min-w-0">
-          <span className={`font-sans font-semibold text-base tracking-tight block mb-1
-                            transition-colors duration-150
-                            ${hovered ? "text-signal" : "text-fog/80"}`}>
-            {label}
-          </span>
-          <span className="font-mono text-[0.48rem] text-dim/50 tracking-widest">{sub}</span>
+      <a href={href} target="_blank" rel="noopener noreferrer" aria-label={aria}
+        className="block focus-visible:outline-signal">
+        <div className="flex items-center gap-4 py-5">
+          <div className="flex-1 min-w-0">
+            <span className={`font-sans font-semibold text-base tracking-tight block mb-1
+                              transition-colors duration-150
+                              ${hovered ? "text-signal" : "text-fog/80"}`}>
+              {label}
+            </span>
+            <span className="font-mono text-[0.48rem] text-dim/50 tracking-widest">{sub}</span>
+          </div>
+          <span className={`font-mono text-base shrink-0 transition-all duration-150
+                            ${hovered ? "text-signal translate-x-1" : "text-border/50"}`}
+            aria-hidden="true">→</span>
         </div>
-        <span className={`font-mono text-base shrink-0 transition-all duration-150
-                          ${hovered ? "text-signal translate-x-1" : "text-border/50"}`}
-          aria-hidden="true">→</span>
-      </div>
-    </a>
+      </a>
+      <button
+        onClick={copyHandle}
+        aria-label={`Copy ${label} handle`}
+        className={`absolute right-16 top-1/2 -translate-y-1/2 font-mono text-[0.45rem]
+                     tracking-widest uppercase border px-2 py-1 transition-colors
+                     focus-visible:outline-signal
+                     ${copied ? "text-signal border-signal/50" : "text-border/60 border-border/30 hover:text-fog hover:border-border/50"}`}
+      >
+        {copied ? "COPIED ✓" : "COPY"}
+      </button>
+    </div>
   );
 };
 

@@ -302,12 +302,17 @@ const Hero: React.FC = () => {
             LinkedIn
           </a>
         </div>
-        <div className="flex items-center gap-2" aria-hidden="true">
-          <motion.div
-            animate={shouldReduce ? {} : { y: [0, 5, 0] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px h-5 bg-border/35" />
-          <span className="annotation text-border/60">SCROLL</span>
+        <div className="flex items-center gap-6">
+          <span className="hidden md:inline-flex items-center gap-2 annotation text-border/50">
+            CTRL + SHIFT + K · terminal
+          </span>
+          <div className="flex items-center gap-2" aria-hidden="true">
+            <motion.div
+              animate={shouldReduce ? {} : { y: [0, 5, 0] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+              className="w-px h-5 bg-signal/60" />
+            <span className="annotation text-border/60">SCROLL</span>
+          </div>
         </div>
       </motion.div>
 
