@@ -8,12 +8,9 @@ const BOOT_KEY = "sk-redline-booted-v1";
 
 const INTRO_WORDS = [
   "I",
-  "turn",
-  "late-night",
-  "bugs",
-  "into",
-  "shipped",
-  "systems.",
+  "intentionally",
+  "makeEdgeCases",
+  "lookHandled.",
 ];
 
 const BOOT_LINES = [
@@ -118,7 +115,7 @@ const SystemBoot: React.FC<SystemBootProps> = ({ onComplete }) => {
                     transition={{ duration: 0.35, ease: "easeOut" }}
                     className={[
                       "inline-block mr-[0.18em]",
-                      word === "bugs" || word === "systems." ? "text-signal" : "text-fog",
+                      word === "makeEdgeCases" || word === "lookHandled." ? "text-signal" : "text-fog",
                     ].join(" ")}
                   >
                     {word}

@@ -40,7 +40,7 @@ src/
 The site is built as a scroll-led story, paced after cinematic portfolio
 references but written entirely in Sohan's coder language:
 
-1. **Boot** — skippable compile ritual (`I turn late-night bugs into shipped systems.`)
+1. **Boot** — skippable compile ritual (`I intentionally makeEdgeCases lookHandled.`)
 2. **Hero** — huge lowercase `sohan`, `Code by day, more code by midnight.`,
    cursor-reactive red glow, 09:00 → 00:00 timeline, verified snapshot strip
 3. **Dev Lab** — brand strip (vscode / github / vercel / docker / original code / sohan / Dev Lab)

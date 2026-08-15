@@ -112,7 +112,9 @@ const Hero: React.FC = () => {
                   <br />
                   more code
                   <br />
-                  by <span className="text-signal">midnight.</span>
+                  by
+                  <br />
+                  <span className="text-signal">midnight.</span>
                 </p>
               </div>
 
@@ -198,7 +200,7 @@ const Hero: React.FC = () => {
                   Best Work <span aria-hidden="true">→</span>
                 </button>
               </Magnetic>
-              <button onClick={() => scrollTo("identity")} className="btn-ghost inline-flex items-center justify-center gap-3">
+              <button onClick={() => scrollTo("identity")} className="btn-ghost inline-flex items-center justify-center gap-3 uppercase">
                 Go on, scroll down <span aria-hidden="true">↓</span>
               </button>
             </div>

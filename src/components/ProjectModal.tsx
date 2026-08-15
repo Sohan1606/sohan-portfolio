@@ -21,6 +21,56 @@ const statusColor: Record<Project["status"], string> = {
   archived:      "text-dim/50",
 };
 
+// Case metrics — every value traceable to the verified project data.
+const CASE_METRICS: Record<string, { label: string; value: string }[]> = {
+  lastkey: [
+    { label: "Portals", value: "2" },
+    { label: "Crypto", value: "AES-256-GCM" },
+    { label: "KDF", value: "PBKDF2" },
+    { label: "State", value: "LIVE" },
+  ],
+  fairloop: [
+    { label: "Agents", value: "5" },
+    { label: "Audit", value: "SHA-256" },
+    { label: "Graph", value: "LangGraph" },
+    { label: "State", value: "LIVE" },
+  ],
+  "cloud-complaint": [
+    { label: "Deploys", value: "2" },
+    { label: "DB", value: "PostgreSQL" },
+    { label: "Infra", value: "Docker Compose" },
+    { label: "State", value: "LIVE" },
+  ],
+  sentra: [
+    { label: "Roles", value: "3" },
+    { label: "Auth", value: "JWT" },
+    { label: "Stack", value: "MERN" },
+    { label: "State", value: "LIVE" },
+  ],
+  qmeet: [
+    { label: "Agents", value: "6" },
+    { label: "State", value: "BUILDING" },
+    { label: "Repo", value: "YES" },
+    { label: "Stack", value: "TypeScript" },
+  ],
+  "hh-goa": [
+    { label: "Task", value: "HH Goa 2026" },
+    { label: "Stack", value: "Next.js" },
+    { label: "Host", value: "Vercel" },
+    { label: "State", value: "LIVE" },
+  ],
+  "ai-product-gen": [
+    { label: "Stack", value: "TypeScript" },
+    { label: "Host", value: "Vercel" },
+    { label: "State", value: "LIVE" },
+  ],
+  "financial-mirror": [
+    { label: "Input", value: "CSV" },
+    { label: "Stack", value: "Node.js" },
+    { label: "State", value: "BUILDING" },
+  ],
+};
+
 const Section: React.FC<{ label: string; signal?: boolean; children: React.ReactNode }> = ({
   label, signal, children,
 }) => (
@@ -135,6 +185,22 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
             </p>
           </div>
 
+          {/* Case metrics — reference-style verified stat strip */}
+          {CASE_METRICS[project.id] && (
+            <div className="mb-10 grid grid-cols-2 md:grid-cols-4 border border-border/25 divide-x divide-border/25">
+              {CASE_METRICS[project.id].map((metric) => (
+                <div key={metric.label} className="p-4 md:p-5 bg-deep/60">
+                  <span className="block font-mono text-[0.45rem] tracking-[0.18em] uppercase text-dim mb-2">
+                    {metric.label}
+                  </span>
+                  <span className="block font-sans font-black text-lg md:text-xl tracking-tighter text-fog">
+                    {metric.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* Body */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
             {project.problem && (
@@ -230,7 +296,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
               ← Previous
             </button>
             <span className="font-mono text-[0.45rem] text-border/60 tracking-widest uppercase" aria-hidden="true">
-              ← → navigate · esc close
+              [ click anywhere to close ]
             </span>
             <button onClick={() => onNavigate(1)}
               aria-label="Next project"
